@@ -9,24 +9,24 @@
 <div class="loginArea">
     <div id="login">
         <form name="loginForm" action="#">
-            <label>Login:</label><input name="login" type="text"/>
-            <label>Password:</label><input name="password" type="text"/>
-            <div id="loginErrors"></div>
-            <input type="submit">
+            <label class="element">Login:</label><input class="element" name="login" type="text"/>
+            <label class="element">Password:</label><input class="element" name="password" type="text"/>
+            <div class="element" class="errorList" id="loginErrors"></div>
+            <input class="element" type="submit">
         </form>
         <a id="registerButton" href="#">Register</a><a id="forgotButton" href="#">Forgot password</a>
     </div>
     <div id="register" style="display: none">
         <form id="registerForm" name="registerForm" action="#">
             <input style="display: none" name="register" value="1">
-            <label>Login:</label><input id="loginField" name="login" type="text"/>
-            <label>First name:</label><input id="firstName" name="firstName" type="text"/>
-            <label>Last name:</label><input id="lastName" name="lastName" type="text"/>
-            <label>Email:</label><input id="email" name="email" type="text"/>
-            <label>Password:</label><input id="password" name="password" type="password"/>
-            <label>Repeat password:</label><input id="rpassword" name="rpassword" type="password"/>
-            <div id="registerErrors"></div>
-            <input type="submit">
+            <label class="element">Login:</label><input class="element" id="loginField" name="login" type="text"/>
+            <label class="element">First name:</label><input class="element" id="firstName" name="firstName" type="text"/>
+            <label class="element">Last name:</label><input class="element" id="lastName" name="lastName" type="text"/>
+            <label class="element">Email:</label><input class="element" id="email" name="email" type="text"/>
+            <label class="element">Password:</label><input class="element" id="password" name="password" type="password"/>
+            <label class="element">Repeat password:</label><input class="element" id="rpassword" name="rpassword" type="password"/>
+            <div class="errorList" id="registerErrors"></div>
+            <input class="element" type="submit">
         </form>
 
     </div>

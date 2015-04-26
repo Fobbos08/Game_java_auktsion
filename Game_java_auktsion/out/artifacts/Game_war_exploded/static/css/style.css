@@ -22,12 +22,45 @@ a {
 .loginArea {
     display: block;
     border-radius: 5px;
-    width:50%;
-    height:50%;
+    width:30%;
+    height:auto;
     margin: 0 auto;
     box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
     background-color: #FFF;
     font-family: Arial, sans-serif;
     z-index: 10;
+    position: fixed;
     font-size: 14px;
+}
+.errorList span {
+    width: 100%;
+    color: red;
+ }
+
+.loginArea .element{
+    width: 90%;
+    margin: 10px 5%;
+    padding: 0px 10px;
+}
+
+.loginArea input[type="text"] {
+    border: 0px none;
+    height: 50px;
+    background: #d0d0d0;
+}
+.loginArea input[type="password"]
+{
+    border: 0px none;
+    height: 50px;
+    background: #d0d0d0;
+}
+.loginArea input[type="submit"]
+{
+    border: 0px none;
+    height: 50px;
+    background: #91a6ff;
+}
+.loginArea label
+{
+    margin: 0px 10px;
 }

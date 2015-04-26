@@ -8,9 +8,9 @@
 <body>
 <div id="header">
     <a id="loginButton" href="#">Login</a>
-    <div class="overlay" style="display: none"/>
     <div id="loginArea">
     </div>
+    <div class="overlay" style="display: none"></div>
 </div>
 <div id="body">
     <jsp:doBody/>
