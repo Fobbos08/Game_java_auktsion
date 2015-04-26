@@ -6,12 +6,14 @@
     <script src="/static/js/main.js"></script>
 </head>
 <body>
-<div id="header">
+<div class="top" id="header">
+    <div class="right">
     <a id="loginButton" href="#">Login</a>
-    <div id="loginArea">
     </div>
-    <div class="overlay" style="display: none"></div>
 </div>
+<div class="login loginArea" id="loginArea" style="display: none">
+</div>
+<div class="overlay" style="display: none"></div>
 <div id="body">
     <jsp:doBody/>
 </div>

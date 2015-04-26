@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="loginArea">
+
     <div id="login">
         <form name="loginForm" action="#">
             <label class="element">Login:</label><input class="element" name="login" type="text"/>
@@ -60,4 +60,3 @@
             });*/
         });
     </script>
-</div>

@@ -1,5 +1,5 @@
 body {
-    padding: 50px;
+    padding: 10px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -17,6 +17,7 @@ a {
     background-color: #CCC;
     z-index: 9;
     opacity: 0.5;
+    overflow: hidden;
 }
 
 .loginArea {
@@ -24,13 +25,15 @@ a {
     border-radius: 5px;
     width:30%;
     height:auto;
-    margin: 0 auto;
+    margin: auto;
     box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
     background-color: #FFF;
     font-family: Arial, sans-serif;
     z-index: 10;
     position: fixed;
     font-size: 14px;
+    overflow-y: auto;
+    left: 0; right: 0;
 }
 .errorList span {
     width: 100%;
@@ -45,22 +48,40 @@ a {
 
 .loginArea input[type="text"] {
     border: 0px none;
-    height: 50px;
+    height: 30px;
     background: #d0d0d0;
 }
 .loginArea input[type="password"]
 {
     border: 0px none;
-    height: 50px;
+    height: 30px;
     background: #d0d0d0;
 }
 .loginArea input[type="submit"]
 {
     border: 0px none;
-    height: 50px;
+    height: 30px;
     background: #91a6ff;
 }
 .loginArea label
 {
     margin: 0px 10px;
+}
+
+.loginArea a{
+    margin: 10px;
+    text-decoration: none;
+}
+
+.loginArea a:hover{
+    font-size: 110%;
+    font-weight: bold;
+}
+
+.top{
+    margin: 0 0;
+}
+
+.right{
+    float:right
 }
