@@ -9,6 +9,7 @@ $(document).ready( function(){
             type: "POST",
             success: function (data) {
                 $('#loginArea').html(data);
+                $('.overlay').show();
             },
             error: function ()
             {

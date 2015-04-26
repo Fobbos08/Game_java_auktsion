@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div>
+<div class="loginArea">
     <div id="login">
         <form name="loginForm" action="#">
             <label>Login:</label><input name="login" type="text"/>
@@ -39,8 +39,7 @@
         $("#registerForm").bind("submit", function(e){
             e.preventDefault();
             $.post('/loginblock', $('#registerForm').serialize(), function(data){
-                alert(JSON.parse(data).result);
-                if (data.result=="ok")
+                if (data.length<20)
                 {
                     $("#registerErrors").html("");
                 }else {

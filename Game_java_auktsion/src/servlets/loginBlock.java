@@ -44,8 +44,31 @@ public class loginBlock extends HttpServlet {
     private String registerValidate(HttpServletRequest request)
     {
         String res = "";
-        res = res+=emailValidate(request.getParameter("email"));
+        res+=validateEmpty(request.getParameter("login"), "login");
+        res+=validateEmpty(request.getParameter("firstName"), "first name");
+        res+=validateEmpty(request.getParameter("lastName"), "last name");
+        res+=emailValidate(request.getParameter("email"));
+        res += validatePassword(request.getParameter("password"), request.getParameter("rpassword"));
         return res;
+    }
+
+    private String validateEmpty(String value, String name)
+    {
+        String errorMessage = "<span>Invalid "+name+", min length 5 symbols</span>";
+        if (value == null) return errorMessage;
+        if (value.length()<5) return errorMessage;
+        return "";
+    }
+
+    private String validatePassword(String password, String rpassword)
+    {
+        String errorMessage1 = "<span>Invalid password, min length 10 symbols</span>";
+        String errorMessage2 = "<span>Passwords do not match</span>";
+        if (password == null) return errorMessage1;
+        if (password.length()<10) return errorMessage1;
+        if (rpassword == null) return errorMessage2;
+        if (password != rpassword) return errorMessage2;
+        return "";
     }
 
     private String emailValidate(String email)
