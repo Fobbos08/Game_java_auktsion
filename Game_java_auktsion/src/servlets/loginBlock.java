@@ -1,6 +1,6 @@
 package servlets;
 
-import sun.org.mozilla.javascript.internal.json.JsonParser;
+import sun.jdbc.odbc.JdbcOdbcDriver;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,14 +10,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.sql.Driver;
+import java.sql.DriverManager;
+
 
 /**
  * Created by Эмиль on 25.04.2015.
  */
+
+
 @WebServlet(name = "loginBlock")
 public class loginBlock extends HttpServlet {
+    private static final String URL = "jdbc:mysql://localhost:3306/gamedb";
+    private static final String USERNAME = "root";
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameter("register") != null)
         {
@@ -28,6 +37,23 @@ public class loginBlock extends HttpServlet {
                 writer.write(validateResult);
             }else
             {
+                Connection connection;
+                try {
+                    Driver driver;
+                    //driver = new FabricMySQLDriver();
+                    DriverManager.registerDriver(driver = new JdbcOdbcDriver());
+
+                    connection = DriverManager.getConnection(URL, USERNAME, "");
+                    if (!connection.isClosed()){
+                        System.out.println("Connected");
+                    }
+                    connection.close();
+                    if (connection.isClosed()){
+                        System.out.println("Disconnected");
+                    }
+                } catch (SQLException e) {
+                    System.err.println("Fail load class driver!");
+                }
                 //insert registration code (insert in DB)!!!!!!!!!!!
                 writer.write("{result: ok}");
             }
@@ -48,7 +74,7 @@ public class loginBlock extends HttpServlet {
         res+=validateEmpty(request.getParameter("firstName"), "first name");
         res+=validateEmpty(request.getParameter("lastName"), "last name");
         res+=emailValidate(request.getParameter("email"));
-        res += validatePassword(request.getParameter("password"), request.getParameter("rpassword"));
+        res += validatePassword(request.getParameter("password"), request.getParameter("password"));
         return res;
     }
 
