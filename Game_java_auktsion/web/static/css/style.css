@@ -44,6 +44,7 @@ a {
     width: 90%;
     margin: 10px 5%;
     padding: 0px 10px;
+    border-radius: 5px;
 }
 
 .loginArea input[type="text"] {
@@ -63,6 +64,11 @@ a {
     height: 30px;
     background: #91a6ff;
 }
+
+.loginArea input:hover{
+    cursor: pointer;
+}
+
 .loginArea label
 {
     margin: 0px 10px;
