@@ -11,6 +11,14 @@
         <servlet-name>LoginBlock</servlet-name>
         <servlet-class>servlets.loginBlock</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreateGamePage</servlet-name>
+        <servlet-class>servlets.createGamePage</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GameWindow</servlet-name>
+        <servlet-class>servlets.gamePage</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>StartPage</servlet-name>
         <url-pattern>/startpage</url-pattern>
@@ -18,5 +26,13 @@
     <servlet-mapping>
         <servlet-name>LoginBlock</servlet-name>
         <url-pattern>/loginblock</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateGamePage</servlet-name>
+        <url-pattern>/creategame</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GameWindow</servlet-name>
+        <url-pattern>/gamewindow</url-pattern>
     </servlet-mapping>
 </web-app>

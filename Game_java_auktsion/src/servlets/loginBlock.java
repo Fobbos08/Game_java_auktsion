@@ -1,10 +1,16 @@
 package servlets;
 
+
+
+import business.DBConnector;
+import business.SessionManipulator;
+import models.User;
 import sun.jdbc.odbc.JdbcOdbcDriver;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,10 +18,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.sql.Driver;
 import java.sql.DriverManager;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 
 /**
@@ -25,8 +32,7 @@ import java.sql.DriverManager;
 
 @WebServlet(name = "loginBlock")
 public class loginBlock extends HttpServlet {
-    private static final String URL = "jdbc:mysql://localhost:3306/gamedb";
-    private static final String USERNAME = "root";
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameter("register") != null)
         {
@@ -37,30 +43,42 @@ public class loginBlock extends HttpServlet {
                 writer.write(validateResult);
             }else
             {
-                Connection connection;
                 try {
-                    Driver driver;
-                    //driver = new FabricMySQLDriver();
-                    DriverManager.registerDriver(driver = new JdbcOdbcDriver());
-
-                    connection = DriverManager.getConnection(URL, USERNAME, "");
-                    if (!connection.isClosed()){
-                        System.out.println("Connected");
-                    }
-                    connection.close();
-                    if (connection.isClosed()){
-                        System.out.println("Disconnected");
-                    }
+                    DBConnector.registerUser(request.getParameter("login"),
+                            request.getParameter("firstName"),
+                            request.getParameter("lastName"),
+                            request.getParameter("email"),
+                            request.getParameter("password"));
                 } catch (SQLException e) {
-                    System.err.println("Fail load class driver!");
+                    e.printStackTrace();
                 }
-                //insert registration code (insert in DB)!!!!!!!!!!!
                 writer.write("{result: ok}");
             }
             writer.close();
+        }else
+        if (request.getParameter("loginForm") != null)
+        {
+            PrintWriter writer = response.getWriter();
+
+            String login = request.getParameter("login");
+            String password = request.getParameter("password");
+
+            User user = DBConnector.getUser(login, password);
+            if (user == null) {
+                writer.write("{result: notFount}");
+                writer.close();
+                return;
+            }
+
+            SessionManipulator.addUser(user);
+            writer.write(user.getGUID().toString());
+            writer.close();
+        }else {
+            RequestDispatcher dispatcher=getServletConfig().getServletContext().getRequestDispatcher(
+                    "/shared/login.jsp"
+            );
+            dispatcher.forward(request,  response);
         }
-        RequestDispatcher dispatcher=getServletConfig().getServletContext().getRequestDispatcher("/shared/login.jsp");
-        dispatcher.forward(request,  response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -74,26 +92,26 @@ public class loginBlock extends HttpServlet {
         res+=validateEmpty(request.getParameter("firstName"), "first name");
         res+=validateEmpty(request.getParameter("lastName"), "last name");
         res+=emailValidate(request.getParameter("email"));
-        res += validatePassword(request.getParameter("password"), request.getParameter("password"));
+        res += validatePassword(request.getParameter("password"), request.getParameter("rpassword"));
         return res;
     }
 
     private String validateEmpty(String value, String name)
     {
-        String errorMessage = "<span>Invalid "+name+", min length 5 symbols</span>";
+        String errorMessage = "<span>Invalid "+name+", min length 2 symbols</span>";
         if (value == null) return errorMessage;
-        if (value.length()<5) return errorMessage;
+        if (value.length()<2) return errorMessage;
         return "";
     }
 
     private String validatePassword(String password, String rpassword)
     {
-        String errorMessage1 = "<span>Invalid password, min length 10 symbols</span>";
+        String errorMessage1 = "<span>Invalid password, min length 4 symbols</span>";
         String errorMessage2 = "<span>Passwords do not match</span>";
         if (password == null) return errorMessage1;
-        if (password.length()<10) return errorMessage1;
+        if (password.length()<4) return errorMessage1;
         if (rpassword == null) return errorMessage2;
-        if (password != rpassword) return errorMessage2;
+        if (!password.equals(rpassword)) return errorMessage2;
         return "";
     }
 

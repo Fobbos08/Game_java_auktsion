@@ -8,7 +8,11 @@
 <body>
 <div class="top" id="header">
     <div class="right">
-    <a id="loginButton" href="#">Login</a>
+        <a id="loginButton" href="#">Login</a>
+    </div>
+    <div class="menu">
+        <a href="/creategame">Create game</a>
+        <a href="/">Start game</a>
     </div>
 </div>
 <div class="login loginArea" id="loginArea" style="display: none">

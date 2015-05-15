@@ -1,16 +1,10 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Эмиль
-  Date: 25.04.2015
-  Time: 21:23
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<script type="text/javascript" src="/static/js/loginFormScript.js" ></script>
     <div id="login">
-        <form name="loginForm" action="#">
+        <form id="loginForm" name="loginForm" action="#">
+            <input name="loginForm" style="display: none;">
             <label class="element">Login:</label><input class="element" name="login" type="text"/>
-            <label class="element">Password:</label><input class="element" name="password" type="text"/>
+            <label class="element">Password:</label><input class="element" name="password" type="password"/>
             <div class="element" class="errorList" id="loginErrors"></div>
             <input class="element" type="submit">
         </form>
@@ -30,33 +24,3 @@
         </form>
 
     </div>
-    <script type="text/javascript">
-        $("#registerButton").bind("click", function(e){
-            e.preventDefault();
-            $("#login").hide();
-            $("#register").show();
-        });
-        $("#registerForm").bind("submit", function(e){
-            e.preventDefault();
-            $.post('/loginblock', $('#registerForm').serialize(), function(data){
-                if (data.length<20)
-                {
-                    $("#registerErrors").html("");
-                }else {
-                    $("#registerErrors").html(data);
-                }
-            });
-            /*$.ajax({
-                url: "/loginblock",
-                type: "POST",
-                data: this,
-                success: function(data){
-                    if (data.length>10)
-                    {
-                        $("#registerErrors").html(data);
-                    }
-                },
-                error: function(){ alert('error'); }
-            });*/
-        });
-    </script>

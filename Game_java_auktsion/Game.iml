@@ -22,12 +22,22 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="file://D:/TomCat/apache-tomcat-8.0.5-windows-x64/apache-tomcat-8.0.5/lib" />
+          <root url="file://C:/apache-tomcat-7.0.59/lib" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
-        <jarDirectory url="file://D:/TomCat/apache-tomcat-8.0.5-windows-x64/apache-tomcat-8.0.5/lib" recursive="false" />
+        <jarDirectory url="file://C:/apache-tomcat-7.0.59/lib" recursive="false" />
       </library>
     </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://C:/Program Files (x86)/MySQL/Connector.J 5.1/mysql-connector-java-5.1.35-bin.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="mysql-connector-java-5.1.35-bin" level="project" />
   </component>
 </module>
