@@ -1,10 +1,11 @@
 <%@ page import="game.Tovar" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="time" id="time">
-    </div>
 <%
     Tovar t = (Tovar) request.getAttribute("goods");
 %>
+<div class="cost" id="cost">
+<%=t.getCost()%>
+</div>
 <div class="title">
     <%=t.getGoods().getTitle()%>
 </div>
@@ -19,4 +20,24 @@
     <%=t.getCurrentCost()%>
 </div>
 
+<div class="byButton">
+</div>
+
+<script type="text/javascript">
+    var ws = new WebSocket("ws://localhost:8081/socket");
+
+    ws.onmessage = function(event) {
+        var mySpan = document.getElementById("cost");
+        if (event.data == "tick")
+        {
+            $.get("/gamewindow", null, function (data){
+                $("#body").html(data);
+            });
+        }
+    };
+
+    ws.onerror = function(event){
+        console.log("Error ", event)
+    }
+</script>
 
