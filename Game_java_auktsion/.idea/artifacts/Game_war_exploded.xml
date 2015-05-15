@@ -6,6 +6,10 @@
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="Game" />
+          <element id="dir-copy" path="C:/apache-tomcat-7.0.55" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="C:/Program Files (x86)/MySQL/Connector.J 5.1/mysql-connector-java-5.1.35-bin.jar" />
         </element>
       </element>
     </root>
