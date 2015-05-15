@@ -8,7 +8,6 @@ import java.util.UUID;
 public class User {
     private UUID guid;
     private int id;
-    private String sessionId;
 
     public UUID getGUID() {
         return guid;
@@ -24,13 +23,5 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getSessionId() {
-        return sessionId;
-    }
-
-    public void setSessionId(String sessionId) {
-        this.sessionId = sessionId;
     }
 }

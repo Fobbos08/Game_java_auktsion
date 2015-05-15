@@ -6,10 +6,8 @@ import models.Goods;
 import models.User;
 
 import javax.swing.*;
-import javax.swing.Timer;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.*;
 
 public final class GameManipulator {
@@ -20,21 +18,9 @@ public final class GameManipulator {
     public static void create()
     {
         if (timer == null) {
+            timer = new Timer();
+            timer.schedule(new TimerTick(), timerDelay);
             games = new ArrayList<Game>();
-            //timer = new Timer(true);
-            //timer.schedule(new TimerTick(), timerDelay);
-            //timer.scheduleAtFixedRate(new TimerTick(), 1, timerDelay);
-
-
-            ActionListener taskPerformer = new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent evt) {
-                    gameLoop();
-                }
-            };
-
-            timer = new Timer(timerDelay, taskPerformer);
-            timer.start();
         }
     }
 

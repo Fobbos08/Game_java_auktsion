@@ -1,8 +1,5 @@
 package game;
 
-import business.SessionManipulator;
-import business.WebSocketHelper;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -58,9 +55,9 @@ public class Game {
     }
 
     public boolean startNextSession() {
-        timerInterval = Math.abs(rnd.nextInt()) % 20 + 5;
-        costInterval = Math.abs(rnd.nextInt()) % 10;
-        minCost = Math.abs(rnd.nextInt()) % 50 + 1;
+        timerInterval = rnd.nextInt() % 20 + 5;
+        costInterval = rnd.nextInt() % 10;
+        minCost = rnd.nextInt() % 50 + 1;
 
         currentTovarIndex = getTovarIndex();
         currentCost = startCost;
@@ -70,7 +67,7 @@ public class Game {
     }
 
     private int getTovarIndex() {
-        int index = 0;
+        int index = rnd.nextInt() % tovars.size();
         return index;
     }
 
@@ -83,24 +80,14 @@ public class Game {
     }
 
     public void sessionTick() {
-        if (timerTime - lastTime > timerInterval*100) {
+        if (timerTime - lastTime > timerInterval) {
             lastTime = timerTime;
             currentCost -= costInterval;
             Tovar t = tovars.get(currentTovarIndex);
-            t.setCurrentCost(currentCost);
-            webSocketSend();
+            t.setCurrentCost(costInterval);
         }
 
         stopSession(false);
-    }
-
-    private void webSocketSend() {
-        ArrayList<String> ids = new ArrayList<String>();
-        for(int i=0; i<players.size(); i++)
-        {
-            ids.add(players.get(i).getSessionId());
-        }
-        WebSocketHelper.sendUpdateInfo("tick", ids);
     }
 
     private void fillTovarsCount(int tovarCount) {
@@ -123,31 +110,12 @@ public class Game {
         return true;
     }
 
-
-
-    private void removeCurrentTovar()
-    {
-        tovarsCount.set(currentTovarIndex, tovarsCount.get(currentTovarIndex)-1);
-        if(tovarsCount.get(currentTovarIndex)<=0)
-        {
-            tovars.remove(currentTovarIndex);
-            tovarsCount.remove(currentTovarIndex);
-        }
-    }
-
     private void stopSession(boolean isBy) {
         if (isBy) {
             sessionIsWork = false;
-            webSocketSend();
-            removeCurrentTovar();
-            startNextSession();
         }
-        if (currentCost <= minCost){
+        if (currentCost <= minCost)
             sessionIsWork = false;
-            webSocketSend();
-            removeCurrentTovar();
-            startNextSession();
-        }
         //если закончились товары то isWork = false;
         //и возвращаем игроков для построения статистики
         //tovarsCount.get(currentTovarIndex)--;
