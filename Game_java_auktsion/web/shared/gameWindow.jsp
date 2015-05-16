@@ -3,6 +3,7 @@
 <%
     Tovar tovar = (Tovar) request.getAttribute("goods");
 %>
+<script type="text/javascript" src="/static/js/game.js" ></script>
 <div class="windowGame">
     <div class="startCost" id="startCost">
     Start cost: <%=tovar.getCost()%>
@@ -21,7 +22,7 @@
         <%=tovar.getCurrentCost()%>
     </div>
 
-    <div class="buyButton">
+    <div id="buyButton" class="buyButton">
         Buy
     </div>
 </div>

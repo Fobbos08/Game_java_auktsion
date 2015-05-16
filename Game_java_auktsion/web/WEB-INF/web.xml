@@ -23,6 +23,10 @@
         <servlet-name>Menu</servlet-name>
         <servlet-class>servlets.Menu</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Game</servlet-name>
+        <servlet-class>servlets.Game</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>StartPage</servlet-name>
         <url-pattern>/startpage</url-pattern>
@@ -41,5 +45,9 @@
     </servlet-mapping><servlet-mapping>
         <servlet-name>Menu</servlet-name>
         <url-pattern>/menu</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Game</servlet-name>
+        <url-pattern>/game</url-pattern>
     </servlet-mapping>
 </web-app>

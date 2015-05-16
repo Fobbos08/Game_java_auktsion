@@ -144,13 +144,15 @@ a {
 }
 
 .windowGame .buyButton{
+    border-radius: 5px;
     width: 100px;
-    height: 100px;
+    height: 40px;
     background-color: cyan;
 }
 
 .windowGame .buyButton:hover{
+    border-radius: 5px;
     width: 100px;
-    height: 100px;
+    height: 40px;
     background-color: blue;
 }

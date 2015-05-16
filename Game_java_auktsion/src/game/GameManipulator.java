@@ -15,12 +15,12 @@ import java.util.*;
 public final class GameManipulator {
     private static int  timerDelay = 1000;
     private static Timer timer;
-    private static ArrayList<Game> games;
+    private static HashMap<UUID, Game> games;
 
     public static void create()
     {
         if (timer == null) {
-            games = new ArrayList<Game>();
+            games = new HashMap<UUID, Game>();
             //timer = new Timer(true);
             //timer.schedule(new TimerTick(), timerDelay);
             //timer.scheduleAtFixedRate(new TimerTick(), 1, timerDelay);
@@ -48,68 +48,70 @@ public final class GameManipulator {
         Tovar t2 = new Tovar(g2, 100);
         g.addTovar(t);
         g.addTovar(t2);
-        games.add(g);
+        games.put(g.getId(), g);
         return g.getId();
     }
 
     public static Tovar getTovar(UUID userId, UUID gameId)
     {
-        for(int i=0; i<games.size(); i++)
+        Game game =  games.get(gameId);
+        if (game != null)
         {
-            if (games.get(i).getId().equals(gameId))
-            {
-                return games.get(i).getCurrentTovar();
-            }
+            return game.getCurrentTovar();
         }
+
         return null;
     }
 
     public static boolean startGame(UUID gameId)
     {
-        for(int i=0; i<games.size(); i++)
+        Game game =  games.get(gameId);
+        if (game != null)
         {
-            if (games.get(i).getId().equals(gameId))
-            {
-                games.get(i).startGame();
-                return true;
-            }
+            return game.startGame();
         }
         return false;
     }
 
     public static boolean addUserToGame(UUID gameId, UUID userId)
     {
-        for(int i=0; i<games.size(); i++)
+        Game game =  games.get(gameId);
+        if (game != null)
         {
-            if (games.get(i).getId().equals(gameId))
-            {
-                User user = SessionManipulator.getUser(userId);
-                String login = DBConnector.getLogin(user.getId());
-                Player p = new Player(SessionManipulator.getUser(userId), login);
-                games.get(i).addPlayer(p);
-                return true;
-            }
+            User user = SessionManipulator.getUser(userId);
+            String login = DBConnector.getLogin(user.getId());
+            Player p = new Player(SessionManipulator.getUser(userId), login);
+            game.addPlayer(p);
+            return true;
         }
         return false;
     }
 
     public static Player getPlayer(UUID gameId, UUID playerId)
     {
-        for(Game game: games)
+        Game game =  games.get(gameId);
+        if (game != null)
         {
-            if(game.getId() == gameId)
-            {
-                return game.getPlayer(playerId);
-            }
+            return game.getPlayer(playerId);
         }
         return null;
     }
 
+    public static boolean buy(UUID gameId, UUID playerId)
+    {
+        Game game =  games.get(gameId);
+        if (game != null)
+        {
+            return game.by(playerId);
+        }
+        return false;
+    }
+
     public static void gameLoop()
     {
-        for(int i=0; i<games.size(); i++)
+        for(Game game: games.values())
         {
-            games.get(i).timerTick(timerDelay);
+            game.timerTick(timerDelay);
         }
     }
 

@@ -176,6 +176,7 @@ public class Game {
             if (currentPlayer.getGuid().equals(guid)) {
                 boolean isOk = currentPlayer.by(tovars.get(currentTovarIndex));
                 stopSession(isOk);
+                webSocketSend();
                 return isOk;
             }
         }

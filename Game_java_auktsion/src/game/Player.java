@@ -13,16 +13,16 @@ public class Player {
     private String name;
     private String score;
     private ArrayList<Tovar> tovarList;/////!!!!!!!!
-    private UUID guid;
     private User user;
 
     public Player(User user, String name) {
         this.user = user;
         this.name = name;
+        this.cash = 100;
     }
 
     public boolean canBy(Tovar currentTovar) {
-        if (cash > currentTovar.getCost()) {
+        if (cash > currentTovar.getCurrentCost()) {
             return true;
         }
         return false;
@@ -39,7 +39,7 @@ public class Player {
     }
 
     public UUID getGuid() {
-        return guid;
+        return user.getGUID();
     }
 
     public String getSessionId()
