@@ -93,6 +93,18 @@ public final class GameManipulator {
         return false;
     }
 
+    public static Player getPlayer(UUID gameId, UUID playerId)
+    {
+        for(Game game: games)
+        {
+            if(game.getId() == gameId)
+            {
+                return game.getPlayer(playerId);
+            }
+        }
+        return null;
+    }
+
     public static void gameLoop()
     {
         for(int i=0; i<games.size(); i++)

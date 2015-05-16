@@ -91,6 +91,18 @@ public class Game {
         stopSession(false);
     }
 
+    public Player getPlayer(UUID id)
+    {
+        for(Player player: players)
+        {
+            if (player.getGuid() == id)
+            {
+                return player;
+            }
+        }
+        return null;
+    }
+
     private void webSocketSend() {
         ArrayList<String> ids = new ArrayList<String>();
         for(int i=0; i<players.size(); i++)

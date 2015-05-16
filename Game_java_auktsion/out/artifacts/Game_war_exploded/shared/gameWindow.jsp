@@ -1,24 +1,24 @@
 <%@ page import="game.Tovar" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    Tovar t = (Tovar) request.getAttribute("goods");
+    Tovar tovar = (Tovar) request.getAttribute("goods");
 %>
 <div class="windowGame">
     <div class="startCost" id="startCost">
-    Start cost: <%=t.getCost()%>
+    Start cost: <%=tovar.getCost()%>
     </div>
     <div class="title">
-        <%=t.getGoods().getTitle()%>
+        <%=tovar.getGoods().getTitle()%>
     </div>
     <div class="description">
-        <%=t.getGoods().getDescription()%>
+        <%=tovar.getGoods().getDescription()%>
     </div>
     <div class="image">
 
     </div>
 
     <div class="cost" id="currentCost">
-        <%=t.getCurrentCost()%>
+        <%=tovar.getCurrentCost()%>
     </div>
 
     <div class="byButton">

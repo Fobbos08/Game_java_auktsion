@@ -6,7 +6,7 @@ $("#loginForm").bind("submit", function(e){
             $("#loginErrors").html("");
             $('#loginForm').hide();
             document.cookie = "id = " + data;
-            alert("найден");
+            location.reload(false);
         }else {
             alert(data);
             $("#loginErrors").html(data);

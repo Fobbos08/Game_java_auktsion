@@ -24,13 +24,17 @@ a {
 
 .menuButton:hover {
     width: 200px;
-    height: 40px;
+    height: 100%;
     padding: 5px 10px;
     text-align: center;
     display: inline-block;
     top:0;
     background-color: white;
     color: lightblue;
+}
+
+.menu{
+    height: 40px;
 }
 
 .header {
@@ -121,7 +125,13 @@ a {
 }
 
 .right{
+    padding: 5px 10px;
     float:right
+}
+
+.right a{
+    text-decoration: none;
+    font-weight: bold;
 }
 
 .windowGame{

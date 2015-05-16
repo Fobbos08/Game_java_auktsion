@@ -19,6 +19,10 @@
         <servlet-name>GameWindow</servlet-name>
         <servlet-class>servlets.gamePage</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Menu</servlet-name>
+        <servlet-class>servlets.Menu</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>StartPage</servlet-name>
         <url-pattern>/startpage</url-pattern>
@@ -34,5 +38,8 @@
     <servlet-mapping>
         <servlet-name>GameWindow</servlet-name>
         <url-pattern>/gamewindow</url-pattern>
+    </servlet-mapping><servlet-mapping>
+        <servlet-name>Menu</servlet-name>
+        <url-pattern>/menu</url-pattern>
     </servlet-mapping>
 </web-app>

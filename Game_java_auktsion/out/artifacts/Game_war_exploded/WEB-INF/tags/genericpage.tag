@@ -7,13 +7,7 @@
 </head>
 <body>
 <div class="header" id="header">
-    <div class="right">
-        <a id="loginButton" href="#">Login</a>
-    </div>
-    <div class="menu">
-        <a href="/creategame"><span class="menuButton" ><p>Create game</p></span></a>
-        <a href="/"><span class="menuButton" ><p>Start game</p></span></a>
-    </div>
+    <jsp:include page="/shared/menu.jsp"/>
 </div>
 <div class="login loginArea" id="loginArea" style="display: none">
 </div>
