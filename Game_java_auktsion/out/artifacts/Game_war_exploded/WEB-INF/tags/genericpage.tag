@@ -6,21 +6,23 @@
     <script src="/static/js/main.js"></script>
 </head>
 <body>
-<div class="top" id="header">
+<div class="header" id="header">
     <div class="right">
         <a id="loginButton" href="#">Login</a>
     </div>
     <div class="menu">
-        <a href="/creategame">Create game</a>
-        <a href="/">Start game</a>
+        <a href="/creategame"><span class="menuButton" ><p>Create game</p></span></a>
+        <a href="/"><span class="menuButton" ><p>Start game</p></span></a>
     </div>
 </div>
 <div class="login loginArea" id="loginArea" style="display: none">
 </div>
 <div class="overlay" style="display: none"></div>
+<div class="main">
 <div id="body">
     <jsp:doBody/>
 </div>
+    </div>
 <div id="footer">
 
 </div>

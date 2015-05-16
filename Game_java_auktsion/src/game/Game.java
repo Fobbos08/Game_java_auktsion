@@ -34,10 +34,7 @@ public class Game {
     private ArrayList<Tovar> tovars;
     private ArrayList<Integer> tovarsCount;
 
-    private Random rnd;
-
     public Game(int maxPlayerCount) {
-        rnd = new Random();
         this.maxPlayerCount = maxPlayerCount;
         int currentSessionNumber = 0;
         sessionIsWork = false;
@@ -58,9 +55,9 @@ public class Game {
     }
 
     public boolean startNextSession() {
-        timerInterval = Math.abs(rnd.nextInt()) % 20 + 5;
-        costInterval = Math.abs(rnd.nextInt()) % 10;
-        minCost = Math.abs(rnd.nextInt()) % 50 + 1;
+        timerInterval = 1+(int)(Math.random()*20);
+        costInterval = 1+(int)(Math.random()*10);
+        minCost = 1+(int)(Math.random()*50);
 
         currentTovarIndex = getTovarIndex();
         currentCost = startCost;

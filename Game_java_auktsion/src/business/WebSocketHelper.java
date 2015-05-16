@@ -27,7 +27,7 @@ public final class WebSocketHelper {
         //sendUpdateInfo(session);
         for(Session ss: sessions)
         {
-            if (((WsSession) ss).getHttpSessionId().equals(((WsSession) session)))
+            if (((WsSession) ss).getHttpSessionId().equals(((WsSession) session).getHttpSessionId()))
                 return;
         }
         sessions.add(session);

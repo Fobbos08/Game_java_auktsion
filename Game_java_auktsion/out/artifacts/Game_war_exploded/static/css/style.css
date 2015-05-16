@@ -1,10 +1,42 @@
 body {
-    padding: 10px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    margin: 0;
 }
 
 a {
     color: #00B7FF;
+}
+
+.main {
+    padding: 10px;
+}
+
+.menuButton{
+    width: 200px;
+    height: 40px;
+    padding: 5px 10px;
+    text-align: center;
+    display: inline-block;
+    top:0;
+    background-color: lightblue;
+    color: white;
+}
+
+.menuButton:hover {
+    width: 200px;
+    height: 40px;
+    padding: 5px 10px;
+    text-align: center;
+    display: inline-block;
+    top:0;
+    background-color: white;
+    color: lightblue;
+}
+
+.header {
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    top: 0px;
+    background-color: honeydew;
 }
 
 .overlay{
@@ -90,4 +122,15 @@ a {
 
 .right{
     float:right
+}
+
+.windowGame{
+    margin: 0 100px;
+}
+.windowGame .title
+{
+    font-weight: 400;
+    font-size: 30px;
+    display: table;
+    margin: auto;
 }
