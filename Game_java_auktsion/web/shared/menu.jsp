@@ -1,6 +1,7 @@
 <%@ page import="java.util.UUID" %>
 <%@ page import="business.SessionManipulator" %>
 <%@ page import="game.GameManipulator" %>
+<%@ page import="helpers.VerifyHelper" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     Cookie[] cookies = request.getCookies();
@@ -11,7 +12,7 @@
     if (cookies != null) {
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals("id")) {
-                isLogined = SessionManipulator.getUser(UUID.fromString(cookie.getValue())) == null ? false : true;
+                isLogined = VerifyHelper.verifySession(UUID.fromString(cookie.getValue()));
             }
             if (cookie.getName().equals("gameId")) {
                 gameId = UUID.fromString(cookie.getValue());
@@ -20,7 +21,7 @@
         }
     }
     if (gameId != null && playerId != null) {
-        isInGame = GameManipulator.getPlayer(gameId, playerId) == null ? false : true;
+        isInGame = VerifyHelper.verifyGame(gameId, playerId);
     }
 %>
 <div class="right">
@@ -31,8 +32,8 @@
     <%}%>
 </div>
 <div class="menu">
-    <% if(isLogined) {%>
+    <% if(isLogined && !isInGame) {%>
         <a href="/creategame"><span class="menuButton" ><p>Create game</p></span></a>
-        <a href="/"><span class="menuButton" ><p>Connect to game</p></span></a>
+        <a href="/connectgame"><span class="menuButton" ><p>Connect to game</p></span></a>
     <%}%>
 </div>

@@ -26,17 +26,17 @@ public final class GameManipulator {
             //timer.scheduleAtFixedRate(new TimerTick(), 1, timerDelay);
 
 
-            ActionListener taskPerformer = new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent evt) {
-                    gameLoop();
-                }
-            };
+        ActionListener taskPerformer = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                gameLoop();
+            }
+        };
 
-            timer = new Timer(timerDelay, taskPerformer);
-            timer.start();
-        }
+        timer = new Timer(timerDelay, taskPerformer);
+        timer.start();
     }
+}
 
     public static UUID createGame(UUID id)
     {
@@ -65,6 +65,7 @@ public final class GameManipulator {
 
     public static boolean startGame(UUID gameId)
     {
+        create();
         Game game =  games.get(gameId);
         if (game != null)
         {
@@ -105,6 +106,24 @@ public final class GameManipulator {
             return game.by(playerId);
         }
         return false;
+    }
+
+    public static ArrayList<ReturnedGame> getGames()
+    {
+        create();
+        ArrayList<ReturnedGame> returnedGames = new ArrayList<ReturnedGame>();
+        for(Game game: games.values())
+        {
+            if(!game.getIsWork())
+            {
+                ReturnedGame g = new ReturnedGame();
+                g.setId(game.getId());
+                g.setMaxPlayerCount(game.getMaxPlayerCount());
+                g.setNowPlayerCount(game.getPlayersCount());
+                returnedGames.add(g);
+            }
+        }
+        return returnedGames;
     }
 
     public static void gameLoop()

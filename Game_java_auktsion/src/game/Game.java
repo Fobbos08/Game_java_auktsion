@@ -191,4 +191,16 @@ public class Game {
     {
         return tovars.get(currentTovarIndex);
     }
+
+    public boolean getIsWork()
+    {
+        return isWork;
+    }
+
+    public int GetNowPlayerCount()
+    {
+        return players.size();
+    }
+
+
 }

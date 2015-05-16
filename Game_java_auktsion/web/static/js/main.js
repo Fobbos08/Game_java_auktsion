@@ -1,12 +1,12 @@
 /**
  * Created by Эмиль on 25.04.2015.
  */
-$(document).ready( function(){
+$(document).ready( function() {
     $('.overlay').bind("click", function () {
         $('.overlay').hide();
         $('#loginArea').hide();
     });
-    $("#loginButton").click(function(e){
+    $("#loginButton").click(function (e) {
         e.preventDefault();
         $.ajax({
             url: "/loginblock",
@@ -16,10 +16,13 @@ $(document).ready( function(){
                 $('#loginArea').html(data);
                 $('.overlay').show();
             },
-            error: function ()
-            {
+            error: function () {
                 alert('error load login block');
             }
         });
+    });
+
+    $("li").click(function (e) {
+        //connecttogame
     });
 });

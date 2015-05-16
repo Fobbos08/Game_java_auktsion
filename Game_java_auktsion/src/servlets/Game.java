@@ -34,11 +34,34 @@ public class Game extends HttpServlet {
             }
         }
         Writer writer = response.getWriter();
-        writer.write("{isBuy:"+ GameManipulator.buy(gameId, id)+"}");
+        if (data == "buy") {
+            writer.write("{isBuy:" + GameManipulator.buy(gameId, id) + "}");
+        }
+        if (data == "connect") {
+
+        }
         writer.close();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String data = request.getParameter("tag");
+        Cookie[] cookies = request.getCookies();
+        UUID gameId = UUID.randomUUID();
+        UUID id = UUID.randomUUID();
 
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("id")) {
+                    id = UUID.fromString(cookie.getValue());
+                }
+                if (cookie.getName().equals("gameId")) {
+                    gameId = UUID.fromString(cookie.getValue());
+                }
+            }
+        }
+
+        if (data == "connect") {
+
+        }
     }
 }
