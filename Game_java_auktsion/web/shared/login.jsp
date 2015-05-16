@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<link rel="stylesheet" href="/static/css/homeStyle.css"> <!-- Gem style -->
-<link rel="stylesheet" href="/static/css/style.css"> <!-- Gem style -->
+<link rel="stylesheet" href="/static/css/menuStyle.css"> <!-- Gem style -->
+
 <script type="text/javascript" src="/static/js/loginFormScript.js" ></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="/static/js/home.js"></script> <!-- Gem jQuery -->
