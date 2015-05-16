@@ -21,7 +21,8 @@
         <%=tovar.getCurrentCost()%>
     </div>
 
-    <div class="byButton">
+    <div class="buyButton">
+        Buy
     </div>
 </div>
 <script type="text/javascript">

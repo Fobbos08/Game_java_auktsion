@@ -14,7 +14,6 @@ a {
 .menuButton{
     width: 200px;
     height: 40px;
-    padding: 5px 10px;
     text-align: center;
     display: inline-block;
     top:0;
@@ -25,7 +24,6 @@ a {
 .menuButton:hover {
     width: 200px;
     height: 100%;
-    padding: 5px 10px;
     text-align: center;
     display: inline-block;
     top:0;
@@ -143,4 +141,16 @@ a {
     font-size: 30px;
     display: table;
     margin: auto;
+}
+
+.windowGame .buyButton{
+    width: 100px;
+    height: 100px;
+    background-color: cyan;
+}
+
+.windowGame .buyButton:hover{
+    width: 100px;
+    height: 100px;
+    background-color: blue;
 }

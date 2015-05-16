@@ -80,7 +80,7 @@ public class Game {
     }
 
     public void sessionTick() {
-        if (timerTime - lastTime > timerInterval*100) {
+        if (timerTime - lastTime > timerInterval*1000) {
             lastTime = timerTime;
             currentCost -= costInterval;
             Tovar t = tovars.get(currentTovarIndex);
