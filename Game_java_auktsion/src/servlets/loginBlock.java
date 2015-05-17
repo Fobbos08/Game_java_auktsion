@@ -20,7 +20,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Driver;
 import java.sql.DriverManager;
-import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -70,14 +69,7 @@ public class loginBlock extends HttpServlet {
                 writer.close();
                 return;
             }
-            Cookie[] cookies = request.getCookies();
-            if (cookies != null) {
-                for (Cookie cookie : cookies) {
-                    if (cookie.getName().equals("JSESSIONID")) {
-                        user.setSessionId(cookie.getValue());
-                    }
-                }
-            }
+
             SessionManipulator.addUser(user);
             writer.write(user.getGUID().toString());
             writer.close();
