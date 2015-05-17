@@ -1,5 +1,6 @@
 package servlets;
 
+import business.ConstFields;
 import game.GameManipulator;
 import game.Player;
 
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.UUID;
 
 /**
@@ -67,6 +69,12 @@ public class Game extends HttpServlet {
             Player p = GameManipulator.getPlayer(gameId, id);
             RequestDispatcher dispatcher=getServletConfig().getServletContext().getRequestDispatcher("/shared/playerStatus.jsp");
             request.setAttribute("player", p);
+            dispatcher.forward(request,  response);
+        }
+        if (data.equals(ConstFields.GetStat)) {
+            ArrayList<Player> players = GameManipulator.getStats(gameId);
+            RequestDispatcher dispatcher=getServletConfig().getServletContext().getRequestDispatcher("/shared/stat.jsp");
+            request.setAttribute("players", players);
             dispatcher.forward(request,  response);
         }
     }

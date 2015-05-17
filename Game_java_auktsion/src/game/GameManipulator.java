@@ -1,5 +1,6 @@
 package game;
 
+import business.ConstFields;
 import business.DBConnector;
 import business.SessionManipulator;
 import models.Goods;
@@ -16,11 +17,17 @@ public final class GameManipulator {
     private static int  timerDelay = 1000;
     private static Timer timer;
     private static HashMap<UUID, Game> games;
+    private static HashMap<UUID, ArrayList<Player>> stats;
+    private static int startCash = 100;
+    private static ISender sender = new WebSocketSender();
+    
+    private static StatisticCreator statCreator = new StatisticCreator();
 
     public static void create()
     {
         if (timer == null) {
             games = new HashMap<UUID, Game>();
+            stats = new HashMap<UUID, ArrayList<Player>>();
             //timer = new Timer(true);
             //timer.schedule(new TimerTick(), timerDelay);
             //timer.scheduleAtFixedRate(new TimerTick(), 1, timerDelay);
@@ -41,7 +48,7 @@ public final class GameManipulator {
     public static UUID createGame(UUID id)
     {
         create();
-        Game g = new Game(7);
+        Game g = new Game(7, sender);
         Goods g1 =  DBConnector.getGoods(1);
         Goods g2 =  DBConnector.getGoods(2);
         Tovar t = new Tovar(g1, 100 );
@@ -91,7 +98,7 @@ public final class GameManipulator {
         {
             User user = SessionManipulator.getUser(userId);
             String login = DBConnector.getLogin(user.getId());
-            Player p = new Player(SessionManipulator.getUser(userId), login);
+            Player p = new Player(SessionManipulator.getUser(userId), startCash);
             game.addPlayer(p);
             return true;
         }
@@ -136,14 +143,27 @@ public final class GameManipulator {
         return returnedGames;
     }
 
+    public static ArrayList<Player> getStats(UUID gameId)
+    {
+        return stats.get(gameId);
+    }
+
     public static void gameLoop()
     {
-        for(Game game: games.values())
+        for(UUID gameKey: games.keySet())
         {
+            Game game = games.get(gameKey);
+            if (game.isEnd())
+            {
+                ArrayList<Player> playersWithStat = statCreator.createStatistic(game.getPlayers(), game.getTovars());
+                stats.put(game.getId(), playersWithStat);//add stats cleaning
+                sender.send(ConstFields.EndGame, playersWithStat);
+                games.remove(gameKey);
+                continue;
+            }
             game.timerTick(timerDelay);
         }
     }
-
 
 }
 

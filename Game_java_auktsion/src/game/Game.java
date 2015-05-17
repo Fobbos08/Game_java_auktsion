@@ -1,5 +1,6 @@
 package game;
 
+import business.ConstFields;
 import business.SessionManipulator;
 import business.WebSocketHelper;
 
@@ -25,6 +26,7 @@ public class Game {
     private int timerInterval;
     private int lastTime;
     private int currentTovarIndex;
+    private boolean gameIsEnd = false;
 
 
     private int currentSessionNumber;
@@ -34,7 +36,10 @@ public class Game {
     private ArrayList<Tovar> tovars;
     private ArrayList<Integer> tovarsCount;
 
-    public Game(int maxPlayerCount) {
+    private ISender sender;
+
+    public Game(int maxPlayerCount, ISender sender) {
+        this.sender = sender;
         this.maxPlayerCount = maxPlayerCount;
         int currentSessionNumber = 0;
         sessionIsWork = false;
@@ -55,11 +60,16 @@ public class Game {
     }
 
     public boolean startNextSession() {
+        currentTovarIndex = getTovarIndex();
+        if (currentTovarIndex < 0) {
+            gameIsEnd = true;
+            return false;
+        }
+
         timerInterval = 1+(int)(Math.random()*20);
         costInterval = 1+(int)(Math.random()*10);
         minCost = 1+(int)(Math.random()*50);
 
-        currentTovarIndex = getTovarIndex();
         currentCost = startCost;
         currentSessionNumber++;
         sessionIsWork = true;
@@ -67,8 +77,14 @@ public class Game {
     }
 
     private int getTovarIndex() {
-        int index = 0;
-        return index;
+        for(int i=0; i<tovarsCount.size(); i++)
+        {
+            if (tovarsCount.get(i) > 0)
+            {
+                return i;
+            }
+        }
+        return -1;
     }
 
     public void timerTick(int timerInterval) {
@@ -85,7 +101,7 @@ public class Game {
             currentCost -= costInterval;
             Tovar t = tovars.get(currentTovarIndex);
             t.setCurrentCost(currentCost);
-            webSocketSend("tick");
+            sender.send(ConstFields.Tick, players);
         }
 
         stopSession(false);
@@ -108,15 +124,6 @@ public class Game {
         return null;
     }
 
-    private void webSocketSend(String message) {
-        ArrayList<String> ids = new ArrayList<String>();
-        for(int i=0; i<players.size(); i++)
-        {
-            ids.add(players.get(i).getSessionId());
-        }
-        WebSocketHelper.sendUpdateInfo(message, ids);
-    }
-
     private void fillTovarsCount(int tovarCount) {
         if (tovarsCount == null) tovarsCount = new ArrayList<Integer>();
         for (int i = 0; i < tovars.size(); i++) {
@@ -128,7 +135,7 @@ public class Game {
         if (players == null) players = new ArrayList<Player>();
         if (maxPlayerCount <= players.size()) return "";
         players.add(Player);
-        webSocketSend("addingUser");
+        sender.send(ConstFields.AddingUser, players);
         return "anyGuid";
     }
 
@@ -138,34 +145,29 @@ public class Game {
         return true;
     }
 
-
-
     private void removeCurrentTovar()
     {
         tovarsCount.set(currentTovarIndex, tovarsCount.get(currentTovarIndex)-1);
-        if(tovarsCount.get(currentTovarIndex)<=0)
+        /*if(tovarsCount.get(currentTovarIndex)<=0)
         {
             tovars.remove(currentTovarIndex);
             tovarsCount.remove(currentTovarIndex);
-        }
+        }*/
     }
 
     private void stopSession(boolean isBy) {
         if (isBy) {
             sessionIsWork = false;
-            webSocketSend("tick");
+            sender.send(ConstFields.Tick, players);
             removeCurrentTovar();
             startNextSession();
         }
         if (currentCost <= minCost){
             sessionIsWork = false;
-            webSocketSend("tick");
+            sender.send(ConstFields.Tick, players);
             removeCurrentTovar();
             startNextSession();
         }
-        //если закончились товары то isWork = false;
-        //и возвращаем игроков для построения статистики
-        //tovarsCount.get(currentTovarIndex)--;
     }
 
     public int getPlayersCount() {
@@ -182,7 +184,7 @@ public class Game {
             if (currentPlayer.getGuid().equals(guid)) {
                 boolean isOk = currentPlayer.by(tovars.get(currentTovarIndex));
                 stopSession(isOk);
-                webSocketSend("tick");
+                sender.send(ConstFields.Tick, players);
                 return isOk;
             }
         }
@@ -206,6 +208,16 @@ public class Game {
     public int GetNowPlayerCount()
     {
         return players.size();
+    }
+
+    public boolean isEnd()
+    {
+        return gameIsEnd;
+    }
+
+    public ArrayList<Tovar> getTovars()
+    {
+        return tovars;
     }
 
 

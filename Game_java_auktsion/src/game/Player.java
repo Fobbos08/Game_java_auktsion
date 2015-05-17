@@ -11,15 +11,13 @@ import java.util.UUID;
  */
 public class Player {
     private int cash;
-    private String name;
-    private String score;
+    private int score;
     private ArrayList<Tovar> tovarList;/////!!!!!!!!
     private User user;
 
-    public Player(User user, String name) {
+    public Player(User user, int startCash) {
         this.user = user;
-        this.name = name;
-        this.cash = 100;
+        this.cash = startCash;
     }
 
     public boolean canBy(Tovar currentTovar) {
@@ -64,5 +62,13 @@ public class Player {
             tovarList = new ArrayList<Tovar>();
         }
         return tovarList;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 }
