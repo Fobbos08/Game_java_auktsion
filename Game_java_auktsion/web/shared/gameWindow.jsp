@@ -5,22 +5,23 @@
 %>
 <script type="text/javascript" src="/static/js/game.js" ></script>
 <div class="windowGame">
-    <div class="title">
-        <%=tovar.getGoods().getTitle()%>
-    </div>
-    <div class="description">
-        <%=tovar.getGoods().getDescription()%>
-    </div>
-    <div class="image">
+    <div class="goods">
+        <div class="title">
+            <%=tovar.getGoods().getTitle()%>
+        </div>
+        <div class="description">
+            <%=tovar.getGoods().getDescription()%>
+        </div>
+        <div class="image">
 
-    </div>
+        </div>
 
-    <div class="cost" id="currentCost">
-        <%=tovar.getCurrentCost()%>
+        <div class="cost" id="currentCost">
+            <%=tovar.getCurrentCost()%>
+        </div>
     </div>
-
     <div id="buyButton" class="buyButton">
-        Buy
+        <p>Buy</p>
     </div>
 
     <div id="myMoney">

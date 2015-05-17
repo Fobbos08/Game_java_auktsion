@@ -57,4 +57,12 @@ public class Player {
     {
         return cash;
     }
+
+    public ArrayList<Tovar> getTovars()
+    {
+        if (tovarList == null) {
+            tovarList = new ArrayList<Tovar>();
+        }
+        return tovarList;
+    }
 }

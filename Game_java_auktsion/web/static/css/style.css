@@ -141,18 +141,70 @@ a {
     font-size: 30px;
     display: table;
     margin: auto;
+    text-shadow: 2px 2px 2px;
+}
+
+.windowGame .description{
+    font-size: 20px;
+    display: table;
+    margin: auto;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+}
+
+.windowGame .cost{
+    font-size: 20px;
+    display: table;
+    margin: auto;
+    text-shadow: 2px 2px 1px rgba(0,0,0,0.8);
+    color: red;
 }
 
 .windowGame .buyButton{
+    display: inline-block;
+    margin: 20px auto;
     border-radius: 5px;
     width: 100px;
     height: 40px;
-    background-color: cyan;
+    background-color: rgb(217, 66, 66);
+    color: white;
+    text-align: center;
+    font-weight: 700;
+    box-shadow: 1px 1px 10px rgba(0,0,0,0.2);
 }
 
 .windowGame .buyButton:hover{
+    margin: 20px auto;
     border-radius: 5px;
     width: 100px;
     height: 40px;
-    background-color: blue;
+    background-color: rgb(217, 66, 66);
+    color: white;
+    text-shadow: 1px 0px 3px;
+    text-align: center;
+    font-weight: 700;
+    box-shadow: 1px 1px 10px rgba(0,0,0,0.2);
+
+}
+
+.windowGame .goods{
+    box-shadow: 1px 1px 10px rgba(0,0,0,0.2);
+    background-color: ghostwhite;
+}
+
+.windowGame .userInfo{
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+    background-color: mintcream;
+}
+
+.windowGame .userInfo label{
+    text-shadow: 1px 1px 1px;
+}
+
+.windowGame .userInfo .money{
+    color: red;
+    text-shadow: 1px 1px 1px;
+}
+
+.windowGame .userInfo .tovar{
+    text-shadow: 1px 1px 1px;
 }
