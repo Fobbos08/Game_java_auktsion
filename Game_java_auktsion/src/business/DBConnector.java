@@ -48,7 +48,6 @@ public final class DBConnector implements IDBConnector {
 
     public static boolean registerUser(String login, String firstName,
                             String lastName, String email, String password) throws SQLException{
-        System.out.println("Insert started!");
         try {
             if (connection == null)
             {
@@ -69,7 +68,6 @@ public final class DBConnector implements IDBConnector {
             System.out.println(e.toString());
             return false;
         }
-        System.out.println("Insert complete!");
         return true;
     }
 
@@ -100,7 +98,6 @@ public final class DBConnector implements IDBConnector {
             e.printStackTrace();
             System.out.println(e.toString());
         }
-        System.out.println("Insert complete!");
 
         return user;
     }
@@ -125,7 +122,6 @@ public final class DBConnector implements IDBConnector {
             e.printStackTrace();
             System.out.println(e.toString());
         }
-        System.out.println("Insert complete!");
 
         return login;
     }
@@ -161,8 +157,6 @@ public final class DBConnector implements IDBConnector {
             e.printStackTrace();
             System.out.println(e.toString());
         }
-        System.out.println("Insert complete!");
-
         return goods;
     }
 }

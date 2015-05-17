@@ -1,7 +1,9 @@
 package servlets;
 
 import game.GameManipulator;
+import game.Player;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -38,6 +40,7 @@ public class Game extends HttpServlet {
             writer.write("{isBuy:" + GameManipulator.buy(gameId, id) + "}");
         }
         writer.close();
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -59,6 +62,12 @@ public class Game extends HttpServlet {
 
         if (data.equals("connection")) {
             GameManipulator.addUserToGame(UUID.fromString(request.getParameter("gameId")), id);
+        }
+        if (data.equals("getMyMoney")) {
+            Player p = GameManipulator.getPlayer(gameId, id);
+            RequestDispatcher dispatcher=getServletConfig().getServletContext().getRequestDispatcher("/shared/playerStatus.jsp");
+            request.setAttribute("player", p);
+            dispatcher.forward(request,  response);
         }
     }
 }

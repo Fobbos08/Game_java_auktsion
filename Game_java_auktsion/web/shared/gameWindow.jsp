@@ -5,9 +5,6 @@
 %>
 <script type="text/javascript" src="/static/js/game.js" ></script>
 <div class="windowGame">
-    <div class="startCost" id="startCost">
-    Start cost: <%=tovar.getCost()%>
-    </div>
     <div class="title">
         <%=tovar.getGoods().getTitle()%>
     </div>
@@ -25,6 +22,10 @@
     <div id="buyButton" class="buyButton">
         Buy
     </div>
+
+    <div id="myMoney">
+        </div>
+
 </div>
 <script type="text/javascript">
     var ws = new WebSocket("ws://localhost:8081/socket");

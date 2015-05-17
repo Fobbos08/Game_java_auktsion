@@ -31,7 +31,7 @@ public class Player {
 
     public boolean by(Tovar currentTovar) {
         if (!canBy(currentTovar)) return false;
-        cash -= currentTovar.getCost();
+        cash -= currentTovar.getCurrentCost();
         if (tovarList == null) {
             tovarList = new ArrayList<Tovar>();
         }
@@ -51,5 +51,10 @@ public class Player {
     public String getName()
     {
         return DBConnector.getLogin(user.getId());
+    }
+
+    public int getCash()
+    {
+        return cash;
     }
 }

@@ -100,7 +100,7 @@ public class Game {
     {
         for(Player player: players)
         {
-            if (player.getGuid() == id)
+            if (player.getGuid().equals(id))
             {
                 return player;
             }
