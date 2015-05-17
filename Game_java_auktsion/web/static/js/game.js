@@ -1,5 +1,5 @@
 $(document).ready( function(){
     $("#buyButton").bind("click", function() {
-        $.post('/game', {tag : "buy"}, function(){});
+        $.post('/game', {data : "buy"}, function(){});
     })
 });

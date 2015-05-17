@@ -109,7 +109,7 @@ public final class DBConnector implements IDBConnector {
     {
         String login = "";
         try {
-            String query = "SELECT * FROM users where iduser=\""+ userId;
+            String query = "SELECT * FROM users where idusers=\""+ userId+"\"";
             if (connection == null)
             {
                 connection = loadDriver();

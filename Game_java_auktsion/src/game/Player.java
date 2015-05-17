@@ -1,5 +1,6 @@
 package game;
 
+import business.DBConnector;
 import models.User;
 
 import java.util.ArrayList;
@@ -45,5 +46,10 @@ public class Player {
     public String getSessionId()
     {
         return user.getSessionId();
+    }
+
+    public String getName()
+    {
+        return DBConnector.getLogin(user.getId());
     }
 }

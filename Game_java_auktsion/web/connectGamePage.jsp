@@ -20,10 +20,32 @@
 %>
 <layout:genericpage>
     <jsp:body>
+        <div class="usersList" id="users"></div>
 
         <h3>Games</h3>
         <ul>
             ${str}
         </ul>
+
+        <script type="text/javascript">
+            var ws = new WebSocket("ws://localhost:8081/socket");
+
+            ws.onmessage = function(event) {
+                var mySpan = document.getElementById("cost");
+                if (event.data == "addingUser")
+                {
+                    $.get("/users", null, function (data){
+                        $("#body").html(data);
+                    });
+                }
+                if (event.data == "tick")
+                {
+                    $.get("/gamewindow", null, function (data){
+                        $("#body").html(data);
+                    });
+                }
+            };
+        </script>
+
     </jsp:body>
 </layout:genericpage>

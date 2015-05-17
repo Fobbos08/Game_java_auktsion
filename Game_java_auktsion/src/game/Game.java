@@ -85,10 +85,15 @@ public class Game {
             currentCost -= costInterval;
             Tovar t = tovars.get(currentTovarIndex);
             t.setCurrentCost(currentCost);
-            webSocketSend();
+            webSocketSend("tick");
         }
 
         stopSession(false);
+    }
+
+    public ArrayList<Player> getPlayers()
+    {
+        return players;
     }
 
     public Player getPlayer(UUID id)
@@ -103,13 +108,13 @@ public class Game {
         return null;
     }
 
-    private void webSocketSend() {
+    private void webSocketSend(String message) {
         ArrayList<String> ids = new ArrayList<String>();
         for(int i=0; i<players.size(); i++)
         {
             ids.add(players.get(i).getSessionId());
         }
-        WebSocketHelper.sendUpdateInfo("tick", ids);
+        WebSocketHelper.sendUpdateInfo(message, ids);
     }
 
     private void fillTovarsCount(int tovarCount) {
@@ -123,6 +128,7 @@ public class Game {
         if (players == null) players = new ArrayList<Player>();
         if (maxPlayerCount <= players.size()) return "";
         players.add(Player);
+        webSocketSend("addingUser");
         return "anyGuid";
     }
 
@@ -147,13 +153,13 @@ public class Game {
     private void stopSession(boolean isBy) {
         if (isBy) {
             sessionIsWork = false;
-            webSocketSend();
+            webSocketSend("tick");
             removeCurrentTovar();
             startNextSession();
         }
         if (currentCost <= minCost){
             sessionIsWork = false;
-            webSocketSend();
+            webSocketSend("tick");
             removeCurrentTovar();
             startNextSession();
         }
@@ -176,7 +182,7 @@ public class Game {
             if (currentPlayer.getGuid().equals(guid)) {
                 boolean isOk = currentPlayer.by(tovars.get(currentTovarIndex));
                 stopSession(isOk);
-                webSocketSend();
+                webSocketSend("tick");
                 return isOk;
             }
         }

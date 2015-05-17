@@ -52,6 +52,16 @@ public final class GameManipulator {
         return g.getId();
     }
 
+    public static ArrayList<Player> getPlayers(UUID gameId)
+    {
+        Game game =  games.get(gameId);
+        if (game != null)
+        {
+            return game.getPlayers();
+        }
+        return null;
+    }
+
     public static Tovar getTovar(UUID userId, UUID gameId)
     {
         Game game =  games.get(gameId);

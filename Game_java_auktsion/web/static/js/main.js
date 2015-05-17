@@ -23,6 +23,7 @@ $(document).ready( function() {
     });
 
     $("li").click(function (e) {
-        //connecttogame
+        document.cookie = "gameId="+this.id;
+        $.get("/game", {data:"connection", gameId:this.id}, function(){})
     });
 });

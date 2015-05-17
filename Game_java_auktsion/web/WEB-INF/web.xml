@@ -27,6 +27,10 @@
         <servlet-name>ConnectGame</servlet-name>
         <servlet-class>servlets.ConnectGamePage</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Users</servlet-name>
+        <servlet-class>servlets.Users</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>StartPage</servlet-name>
         <url-pattern>/startpage</url-pattern>
@@ -50,5 +54,9 @@
     <servlet-mapping>
         <servlet-name>ConnectGame</servlet-name>
         <url-pattern>/connectgame</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Users</servlet-name>
+        <url-pattern>/users</url-pattern>
     </servlet-mapping>
 </web-app>
