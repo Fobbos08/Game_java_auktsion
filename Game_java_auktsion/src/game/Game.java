@@ -5,6 +5,8 @@ import business.SessionManipulator;
 import business.WebSocketHelper;
 import game.bonuses.Bonus;
 import game.bonuses.BonusFactory;
+import game.bonuses.IBuyHelper;
+import game.bonuses.Joker;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,6 +28,10 @@ public class Game {
     private int lastTime;
     private int currentTovarIndex;
     private boolean gameIsEnd = false;
+    private int startPlayerMoney = 100;
+
+    private boolean isJoker = false;
+    private IBuyHelper joker = new Joker();
 
 
     private int currentSessionNumber;
@@ -65,11 +71,13 @@ public class Game {
             return false;
         }
 
+        randomJoker();
+
         tovars.get(currentTovarIndex).setCurrentCost(startCost);
 
-        timerInterval = 1+(int)(Math.random()*20);
-        costInterval = 1+(int)(Math.random()*10);
-        minCost = 1+(int)(Math.random()*50);
+        timerInterval = 1 + (int) (Math.random() * 20);
+        costInterval = 1 + (int) (Math.random() * 10);
+        minCost = 1 + (int) (Math.random() * 50);
 
         currentCost = startCost;
         currentSessionNumber++;
@@ -78,10 +86,8 @@ public class Game {
     }
 
     private int getTovarIndex() {
-        for(int i=0; i<tovarsCount.size(); i++)
-        {
-            if (tovarsCount.get(i) > 0)
-            {
+        for (int i = 0; i < tovarsCount.size(); i++) {
+            if (tovarsCount.get(i) > 0) {
                 return i;
             }
         }
@@ -96,8 +102,24 @@ public class Game {
         }
     }
 
+    public void randomJoker() {
+        if (Math.random() * 100 < 10) {
+            isJoker = true;
+            sender.send("joker", players);
+        } else {
+            isJoker = false;
+            sender.send("joker", players);
+        }
+    }
+
+    public boolean isJoker()
+    {
+        return isJoker;
+    }
+
     public void sessionTick() {
         if (timerTime - lastTime > timerInterval*1000) {
+            randomJoker();
             lastTime = timerTime;
             currentCost -= costInterval;
             Tovar t = tovars.get(currentTovarIndex);

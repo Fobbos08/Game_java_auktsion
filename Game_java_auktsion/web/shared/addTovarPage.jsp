@@ -17,7 +17,7 @@
             img.onload = function() {
                 img.style.width = "100%";
                 img.style.height = "100%";
-                $("#imageBox")[0].innerHTML = img.outerHTML;
+                $("#imageBox").html(img.outerHTML);
             }
             img.src = event.target.result;
 

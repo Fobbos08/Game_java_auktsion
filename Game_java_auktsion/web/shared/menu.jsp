@@ -1,8 +1,5 @@
 <%@ page import="java.util.UUID" %>
-<%@ page import="business.SessionManipulator" %>
-<%@ page import="game.GameManipulator" %>
 <%@ page import="helpers.VerifyHelper" %>
-<%@ page import="models.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     Cookie[] cookies = request.getCookies();
@@ -19,7 +16,6 @@
             }
             if (cookie.getName().equals("gameId")) {
                 gameId = UUID.fromString(cookie.getValue());
-                //isInGame = true;
             }
         }
     }
@@ -38,6 +34,8 @@
     <% if(isLogined & !isInGame) {%>
         <a href="/creategame"><span class="menuButton" ><p>Create game</p></span></a>
         <a href="/connectgame"><span class="menuButton" ><p>Connect to game</p></span></a>
+        <a href="/playerstat"><span class="menuButton" ><p>Statistic</p></span></a>
+
     <%}%>
     <% if(isLogined & isAdmin) {%>
     <a href="/adminpage"><span class="menuButton" ><p>Admin page</p></span></a>

@@ -28,6 +28,13 @@
 %>
 <layout:genericpage>
     <jsp:body>
+        <div class="usersList" id="users"></div>
+
+        <h3>Games</h3>
+        <ul>
+                ${str}
+        </ul>
+
         <jsp:include page="/shared/gamePage.jsp"/>
     </jsp:body>
 </layout:genericpage>

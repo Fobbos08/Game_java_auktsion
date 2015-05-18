@@ -5,7 +5,9 @@
 %>
 <script type="text/javascript" src="/static/js/game.js" ></script>
 <div class="windowGame">
+    <div id="bon">
     <jsp:include page="/shared/bonuses.jsp"/>
+        </div>
     <div class="goods">
         <div class="title">
             <%=tovar.getGoods().getTitle()%>
@@ -38,6 +40,12 @@
         {
             $.get("/gamewindow", null, function (data){
                 $("#body").html(data);
+            });
+        }
+        if (event.data == "joker")
+        {
+            $.get("/bonuses", {}, function (data){
+                $("#bon").html(data);
             });
         }
     };

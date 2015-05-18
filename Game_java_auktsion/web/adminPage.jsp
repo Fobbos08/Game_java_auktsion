@@ -4,15 +4,15 @@
 <layout:genericpage>
     <jsp:body>
         <div class="subMenu">
-            <a href="#" id="addTovar"><span class="menuButton" ><p>Create game</p></span></a>
+            <a href="#" id="settings"><span class="menuButton" ><p>Settings</p></span></a>
         </div>
         <div id="mainBody">
         </div>
         <script type="text/javascript">
             $(document).ready(function () {
-                $("#addTovar").bind("click", function (e) {
+                $("#settings").bind("click", function (e) {
                     e.preventDefault();
-                    $.post("/adminpage", {data:"addtovar"}, function(data){
+                    $.post("/adminpage", {data:"settings"}, function(data){
                         $("#mainBody").html(data);
                     });
                 });

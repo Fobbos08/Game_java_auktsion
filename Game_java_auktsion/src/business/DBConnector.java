@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 import com.mysql.jdbc.*;
+import game.Player;
 import models.Goods;
 import models.User;
 
@@ -54,8 +55,8 @@ public final class DBConnector implements IDBConnector {
                 connection = loadDriver();
             }
             PreparedStatement preparedStmt = (PreparedStatement) connection.prepareStatement(
-                    "INSERT INTO users (login,firstName,lastName,email,password,isAdmin) " +
-                            "VALUES (?, ?, ?, ?, ?, ?)"
+                    "INSERT INTO users (login,firstName,lastName,email,password,isAdmin,gamesCount,totalScore) " +
+                            "VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
             );
             preparedStmt.setString(1, login);
             preparedStmt.setString(2, firstName);
@@ -159,5 +160,79 @@ public final class DBConnector implements IDBConnector {
             System.out.println(e.toString());
         }
         return goods;
+    }
+
+    public static int getUserGameCount(int userId){
+        int gamesCount = 0;
+        try {
+            String query = "SELECT * FROM users where idusers=\""+ userId+"\"";
+            if (connection == null)
+            {
+                connection = loadDriver();
+            }
+            Statement st = (Statement) connection.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            // iterate through the java resultset
+            rs.next();
+            gamesCount = Integer.parseInt(rs.getString("gamesCount"));
+            st.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println(e.toString());
+        }
+
+        return gamesCount;
+    }
+
+    public static int getUserTotalScore(int userId){
+        int totalScore = 0;
+        try {
+            String query = "SELECT * FROM users where idusers=\""+ userId+"\"";
+            if (connection == null)
+            {
+                connection = loadDriver();
+            }
+            Statement st = (Statement) connection.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            // iterate through the java resultset
+            rs.next();
+            totalScore = Integer.parseInt(rs.getString("totalScore"));
+            st.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println(e.toString());
+        }
+
+        return totalScore;
+    }
+
+    public static void setStatistic(Player player)
+    {
+
+        int totalScore = getUserTotalScore(player.getId());
+        int gamesCount = getUserGameCount(player.getId());
+        try {
+            PreparedStatement preparedStmt = (PreparedStatement) connection.prepareStatement(
+                    "UPDATE users SET totalScore = ?, gamesCount = ? WHERE idusers=\""+player.getId()+"\""
+            );
+            preparedStmt.setString(1, String.valueOf(totalScore+player.getScore()));
+            preparedStmt.setString(2, String.valueOf(gamesCount+1));
+            preparedStmt.execute();
+
+            /*String query = "UPDATE users SET \"totalScore\"=\""+totalScore+"\", \"gamesCount\"=\""+gamesCount+"\"  where idusers=\""+ player.getId()+"\"";
+            if (connection == null)
+            {
+                connection = loadDriver();
+            }
+            Statement st = (Statement) connection.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            st.close();*/
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println(e.toString());
+        }
+        player.getId();
     }
 }

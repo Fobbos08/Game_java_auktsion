@@ -1,5 +1,6 @@
 <%@ page import="business.ConstFields" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <%
     request.setAttribute("AddingUser", ConstFields.AddingUser);
     request.setAttribute("Buy", ConstFields.Buy);
@@ -7,6 +8,7 @@
     request.setAttribute("GetStat", ConstFields.GetStat);
     request.setAttribute("Tick", ConstFields.Tick);
 %>
+
 <div class="usersList" id="users"></div>
 
 <script type="text/javascript">

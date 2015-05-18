@@ -122,6 +122,11 @@ public final class GameManipulator {
         return false;
     }
 
+    public static void setStartCash(int startMoney)
+    {
+        startCash = startMoney;
+    }
+
     public static ArrayList<ReturnedGame> getGames()
     {
         create();
@@ -147,9 +152,16 @@ public final class GameManipulator {
 
     public static boolean buyBonus(UUID gameId, UUID playerId, Bonus bonus){
         Game game =  games.get(gameId);
-        if (game != null)
-        {
+        if (game != null) {
             return game.buyBonus(playerId, bonus);
+        }
+        return false;
+    }
+
+    public static boolean isJoker(UUID gameId){
+        Game game =  games.get(gameId);
+        if (game != null) {
+            return game.isJoker();
         }
         return false;
     }
@@ -162,7 +174,11 @@ public final class GameManipulator {
             if (game.isEnd())
             {
                 ArrayList<Player> playersWithStat = statCreator.createStatistic(game.getPlayers(), game.getTovars());
-                stats.put(game.getId(), playersWithStat);//add stats cleaning
+                stats.put(game.getId(), playersWithStat);
+                for (Player p:playersWithStat)
+                {
+                    DBConnector.setStatistic(p);
+                }
                 sender.send(ConstFields.EndGame, playersWithStat);
                 games.remove(gameKey);
                 continue;

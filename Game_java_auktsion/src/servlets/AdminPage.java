@@ -26,6 +26,10 @@ public class AdminPage extends HttpServlet {
             RequestDispatcher dispatcher=getServletConfig().getServletContext().getRequestDispatcher("/shared/addTovarPage.jsp");
             dispatcher.forward(request, response);
         }
+        if (data.equals("settings")) {
+            RequestDispatcher dispatcher=getServletConfig().getServletContext().getRequestDispatcher("/shared/settingPage.jsp");
+            dispatcher.forward(request, response);
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

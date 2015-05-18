@@ -35,6 +35,18 @@
         <servlet-name>AdminPage</servlet-name>
         <servlet-class>servlets.AdminPage</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Settings</servlet-name>
+        <servlet-class>servlets.Settings</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Bonuses</servlet-name>
+        <servlet-class>servlets.Bonuses</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PlayerStat</servlet-name>
+        <servlet-class>servlets.Statistic</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>StartPage</servlet-name>
         <url-pattern>/startpage</url-pattern>
@@ -66,5 +78,17 @@
     <servlet-mapping>
         <servlet-name>AdminPage</servlet-name>
         <url-pattern>/adminpage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Settings</servlet-name>
+        <url-pattern>/settings</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Bonuses</servlet-name>
+        <url-pattern>/bonuses</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PlayerStat</servlet-name>
+        <url-pattern>/playerstat</url-pattern>
     </servlet-mapping>
 </web-app>
