@@ -18,6 +18,8 @@ a {
     display: inline-block;
     top:0;
     background-color: lightblue;
+    text-shadow: 1px 1px 2px rgba(0,0,0,1);
+    font-weight: bold;
     color: white;
 }
 
@@ -29,6 +31,8 @@ a {
     top:0;
     background-color: white;
     color: lightblue;
+    text-shadow: 1px 1px 2px rgba(0,0,0,1);
+    font-weight: bold;
 }
 
 .menu{
@@ -69,6 +73,17 @@ a {
     overflow-y: auto;
     left: 0; right: 0;
 }
+
+.loginButton
+{
+    font-weight: normal;
+}
+
+.loginButton:hover
+{
+    font-weight: bold;
+}
+
 .errorList span {
     width: 100%;
     color: red;
@@ -114,7 +129,7 @@ a {
 }
 
 .loginArea a:hover{
-    font-size: 110%;
+    font-size: 100%;
     font-weight: bold;
 }
 
@@ -129,7 +144,7 @@ a {
 
 .right a{
     text-decoration: none;
-    font-weight: bold;
+
 }
 
 .windowGame{
@@ -170,6 +185,7 @@ a {
     text-align: center;
     font-weight: 700;
     box-shadow: 1px 1px 10px rgba(0,0,0,0.2);
+    cursor: pointer;
 }
 
 .windowGame .buyButton:hover{
@@ -183,7 +199,7 @@ a {
     text-align: center;
     font-weight: 700;
     box-shadow: 1px 1px 10px rgba(0,0,0,0.2);
-
+    cursor: pointer;
 }
 
 .windowGame .goods{
@@ -208,3 +224,64 @@ a {
 .windowGame .userInfo .tovar{
     text-shadow: 1px 1px 1px;
 }
+
+.score {
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+    width: 90%;
+    margin: auto;
+    text-align: center;
+}
+
+.score .user.winner{
+    background-color: rgb(207, 255, 159);
+}
+.score .user.looser {
+    background-color: rgb(252, 118, 118);
+}
+.score .user h2{
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.score .user label{
+    text-shadow: 1px 1px 2px rgba(0,0,0,1);
+    font-weight: bold;
+    color: white;
+}
+
+.score .user span{
+    text-shadow: 1px 1px 2px rgba(0,0,0,1);
+    font-weight: bold;
+    color: white;
+}
+
+.windowGame .bonuses{
+    display: inline-flex;
+    margin: 10px;
+}
+
+.windowGame .bonuses .bonus{
+    margin: 0 5px;
+    height: 100px;
+    width: 100px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    cursor: pointer;
+}
+
+.windowGame .bonuses .bonus:hover{
+    margin: 0 5px;
+    height: 100px;
+    width: 100px;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.9);
+    cursor: pointer;
+}
+
+.windowGame .bonuses .bonus.Joker {
+    background-image: url("/static/images/joker.jpg");
+    background-size: contain;
+}
+
+.windowGame .bonuses .bonus.Whiskey {
+    background-image: url("/static/images/whiskey.jpg");
+    background-size: contain;
+}
+

@@ -5,6 +5,7 @@
 %>
 <script type="text/javascript" src="/static/js/game.js" ></script>
 <div class="windowGame">
+    <jsp:include page="/shared/bonuses.jsp"/>
     <div class="goods">
         <div class="title">
             <%=tovar.getGoods().getTitle()%>

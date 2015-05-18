@@ -22,6 +22,7 @@ public class StatisticCreator {
             p.setScore(ids.size()*20 - (tovars.size()-ids.size())*20);
             if (ids.size() == tovars.size()) {
                 p.setScore(p.getScore() + p.getCash());
+                p.setScore(p.getScore()*2);
             }
         }
 

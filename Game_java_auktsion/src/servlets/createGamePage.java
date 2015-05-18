@@ -17,7 +17,7 @@ import java.util.UUID;
  * Created by Эмиль on 14.05.2015.
  */
 @WebServlet(name = "createGamePage")
-public class createGamePage extends HttpServlet {
+public class CreateGamePage extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Cookie[] cookies = request.getCookies();
         boolean isOk;

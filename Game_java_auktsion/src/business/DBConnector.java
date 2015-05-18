@@ -54,14 +54,15 @@ public final class DBConnector implements IDBConnector {
                 connection = loadDriver();
             }
             PreparedStatement preparedStmt = (PreparedStatement) connection.prepareStatement(
-                    "INSERT INTO users (login,firstName,lastName,email,password) " +
-                            "VALUES (?, ?, ?, ?, ?)"
+                    "INSERT INTO users (login,firstName,lastName,email,password,isAdmin) " +
+                            "VALUES (?, ?, ?, ?, ?, ?)"
             );
             preparedStmt.setString(1, login);
             preparedStmt.setString(2, firstName);
             preparedStmt.setString(3, lastName);
             preparedStmt.setString(4, email);
             preparedStmt.setString(5, password);
+            preparedStmt.setString(6, "false");
             preparedStmt.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -91,6 +92,8 @@ public final class DBConnector implements IDBConnector {
             // iterate through the java resultset
             rs.next();
             user.setId(rs.getInt("idusers"));
+            user.setName(rs.getString("login"));
+            user.setAdmin(Boolean.parseBoolean(rs.getString("isAdmin")));
             user.setGUID(UUID.randomUUID());
 
             st.close();
@@ -125,8 +128,6 @@ public final class DBConnector implements IDBConnector {
 
         return login;
     }
-
-
 
     public static Goods getGoods(int id)
     {

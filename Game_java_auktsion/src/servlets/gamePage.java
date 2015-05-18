@@ -17,7 +17,7 @@ import java.util.UUID;
  * Created by Эмиль on 15.05.2015.
  */
 @WebServlet(name = "gamePage")
-public class gamePage extends HttpServlet {
+public class GamePage extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //by for example
     }

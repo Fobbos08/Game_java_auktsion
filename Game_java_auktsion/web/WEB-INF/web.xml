@@ -5,19 +5,19 @@
          version="3.1">
     <servlet>
         <servlet-name>StartPage</servlet-name>
-        <servlet-class>servlets.startPage</servlet-class>
+        <servlet-class>servlets.StartPage</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoginBlock</servlet-name>
-        <servlet-class>servlets.loginBlock</servlet-class>
+        <servlet-class>servlets.LoginBlock</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CreateGamePage</servlet-name>
-        <servlet-class>servlets.createGamePage</servlet-class>
+        <servlet-class>servlets.CreateGamePage</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>GameWindow</servlet-name>
-        <servlet-class>servlets.gamePage</servlet-class>
+        <servlet-class>servlets.GamePage</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Game</servlet-name>
@@ -30,6 +30,10 @@
     <servlet>
         <servlet-name>Users</servlet-name>
         <servlet-class>servlets.Users</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminPage</servlet-name>
+        <servlet-class>servlets.AdminPage</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>StartPage</servlet-name>
@@ -58,5 +62,9 @@
     <servlet-mapping>
         <servlet-name>Users</servlet-name>
         <url-pattern>/users</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminPage</servlet-name>
+        <url-pattern>/adminpage</url-pattern>
     </servlet-mapping>
 </web-app>

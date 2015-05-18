@@ -3,6 +3,7 @@ package game;
 import business.ConstFields;
 import business.DBConnector;
 import business.SessionManipulator;
+import game.bonuses.Bonus;
 import models.Goods;
 import models.User;
 
@@ -28,10 +29,6 @@ public final class GameManipulator {
         if (timer == null) {
             games = new HashMap<UUID, Game>();
             stats = new HashMap<UUID, ArrayList<Player>>();
-            //timer = new Timer(true);
-            //timer.schedule(new TimerTick(), timerDelay);
-            //timer.scheduleAtFixedRate(new TimerTick(), 1, timerDelay);
-
 
         ActionListener taskPerformer = new ActionListener() {
             @Override
@@ -42,10 +39,10 @@ public final class GameManipulator {
 
         timer = new Timer(timerDelay, taskPerformer);
         timer.start();
+        }
     }
-}
 
-    public static UUID createGame(UUID id)
+    public static UUID createGame(UUID id)//add tovar count
     {
         create();
         Game g = new Game(7, sender);
@@ -146,6 +143,15 @@ public final class GameManipulator {
     public static ArrayList<Player> getStats(UUID gameId)
     {
         return stats.get(gameId);
+    }
+
+    public static boolean buyBonus(UUID gameId, UUID playerId, Bonus bonus){
+        Game game =  games.get(gameId);
+        if (game != null)
+        {
+            return game.buyBonus(playerId, bonus);
+        }
+        return false;
     }
 
     public static void gameLoop()

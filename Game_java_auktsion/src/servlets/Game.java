@@ -3,6 +3,7 @@ package servlets;
 import business.ConstFields;
 import game.GameManipulator;
 import game.Player;
+import game.bonuses.Bonus;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,9 +17,6 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.UUID;
 
-/**
- * Created by Эмиль on 16.05.2015.
- */
 @WebServlet(name = "Game")
 public class Game extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -40,6 +38,12 @@ public class Game extends HttpServlet {
         Writer writer = response.getWriter();
         if (data.equals("buy")) {
             writer.write("{isBuy:" + GameManipulator.buy(gameId, id) + "}");
+        }
+
+        if (data.equals("buyBonus")) {
+            Bonus bonus = Bonus.valueOf(request.getParameter("bonusName"));
+            writer.write("{isBuyBonus:" + GameManipulator.buyBonus(gameId, id, bonus) + ", " +
+                    "isBuy:"+ GameManipulator.buy(gameId, id) +"}");
         }
         writer.close();
 

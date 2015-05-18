@@ -1,35 +1,51 @@
 package game;
 
 import business.DBConnector;
+import game.bonuses.IBuyHelper;
 import models.User;
 
 import java.util.ArrayList;
 import java.util.UUID;
 
-/**
- * Created by Эмиль on 02.05.2015.
- */
 public class Player {
     private int cash;
     private int score;
-    private ArrayList<Tovar> tovarList;/////!!!!!!!!
+    private ArrayList<Tovar> tovarList;
     private User user;
+    private IBuyHelper buyHelper;
 
     public Player(User user, int startCash) {
         this.user = user;
         this.cash = startCash;
     }
 
-    public boolean canBy(Tovar currentTovar) {
-        if (cash > currentTovar.getCurrentCost()) {
+    public boolean canBy(int cost) {
+        if (cash > cost) {
             return true;
         }
         return false;
     }
 
+    public boolean buyBonus(IBuyHelper buyHelper)
+    {
+        if (!canBy(buyHelper.getCost())) return false;
+        this.buyHelper = buyHelper;
+        cash -= buyHelper.getCost();
+        return true;
+    }
+
     public boolean by(Tovar currentTovar) {
-        if (!canBy(currentTovar)) return false;
-        cash -= currentTovar.getCurrentCost();
+        int tovarCost = currentTovar.getCurrentCost();
+
+        if(buyHelper != null)
+        {
+            tovarCost = buyHelper.getNewCost(tovarCost);
+            buyHelper = null;
+        }
+
+        if (!canBy(tovarCost)) return false;
+
+        cash -= tovarCost;
         if (tovarList == null) {
             tovarList = new ArrayList<Tovar>();
         }
@@ -48,7 +64,7 @@ public class Player {
 
     public String getName()
     {
-        return DBConnector.getLogin(user.getId());
+        return user.getName();
     }
 
     public int getCash()

@@ -32,7 +32,7 @@ import java.util.regex.Pattern;
 
 
 @WebServlet(name = "loginBlock")
-public class loginBlock extends HttpServlet {
+public class LoginBlock extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameter("register") != null)

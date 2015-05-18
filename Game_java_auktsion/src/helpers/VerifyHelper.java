@@ -14,6 +14,11 @@ public final class VerifyHelper {
         return SessionManipulator.getUser(id) == null ? false : true;
     }
 
+    public static boolean verifyAdmin(UUID id)
+    {
+        return SessionManipulator.getUser(id) != null ? SessionManipulator.getUser(id).isAdmin() : false;
+    }
+
     public static boolean verifyGame(UUID gameId, UUID playerId)
     {
         return GameManipulator.getPlayer(gameId, playerId) == null ? false : true;

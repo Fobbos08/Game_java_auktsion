@@ -9,6 +9,8 @@ public class User {
     private UUID guid;
     private int id;
     private String sessionId;
+    private String name;
+    private boolean isAdmin;
 
     public UUID getGUID() {
         return guid;
@@ -32,5 +34,21 @@ public class User {
 
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 }

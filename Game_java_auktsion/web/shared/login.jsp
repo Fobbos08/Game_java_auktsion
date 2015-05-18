@@ -8,7 +8,7 @@
             <div class="element" class="errorList" id="loginErrors"></div>
             <input class="element" type="submit">
         </form>
-        <a id="registerButton" href="#">Register</a><a id="forgotButton" href="#">Forgot password</a>
+        <a id="registerButton" href="#">Register</a>
     </div>
     <div id="register" style="display: none">
         <form id="registerForm" name="registerForm" action="#">

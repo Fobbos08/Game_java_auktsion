@@ -3,6 +3,8 @@ package game;
 import business.ConstFields;
 import business.SessionManipulator;
 import business.WebSocketHelper;
+import game.bonuses.Bonus;
+import game.bonuses.BonusFactory;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,9 +12,6 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.UUID;
 
-/**
- * Created by Эмиль on 02.05.2015.
- */
 public class Game {
     private UUID gameId;
     private int startCost = 100;
@@ -65,6 +64,8 @@ public class Game {
             gameIsEnd = true;
             return false;
         }
+
+        tovars.get(currentTovarIndex).setCurrentCost(startCost);
 
         timerInterval = 1+(int)(Math.random()*20);
         costInterval = 1+(int)(Math.random()*10);
@@ -218,6 +219,18 @@ public class Game {
     public ArrayList<Tovar> getTovars()
     {
         return tovars;
+    }
+
+    public boolean buyBonus(UUID guid, Bonus bonus)
+    {
+        for (int i = 0; i < players.size(); i++) {
+            Player currentPlayer = players.get(i);
+            if (currentPlayer.getGuid().equals(guid)) {
+                boolean isOk = currentPlayer.buyBonus(BonusFactory.createHelper(bonus));
+                return isOk;
+            }
+        }
+        return false;
     }
 
 
